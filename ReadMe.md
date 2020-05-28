@@ -8,6 +8,10 @@ My idea is to comment as much as possible the scripts so they can be easy to rea
 
 I'm gonna use subfolders to order and document them.
 
+## You
+If you think there is something to change or improve, please be welcome!! This is my first repo in GitHub and I will try to add any contribution or comment.
+Please let me know if it is something to be improve, added or corrected in the documentation, the code, the comments, my english or my spanish. Any help is welcomed.
+
 ## spanish and english
 My native language is Spanish so most of the actual comments and variable names are in spanish. I´m going to translate them to english over the time (I think I'm going to let the spanish comments as well)
 
