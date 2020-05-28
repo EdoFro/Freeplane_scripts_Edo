@@ -17,7 +17,7 @@ I'm going to write some of the docs in spanish first (easier) and hopefully tran
 
 Script | Description
 -------|----------
-scriptxx.groovy | description of the script and a link to its [folder](/folder)
+copyLinkToClipboard.groovy | copies the path of a "link to a file" from the selected node (if it has any) into the clipboard ([here](/copy%20node%20link%20to%20clipboard))
 
 ## TODO list:
 
