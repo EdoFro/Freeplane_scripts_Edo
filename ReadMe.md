@@ -1,5 +1,5 @@
 # Freeplane Scripts Edo
-Here I want to build a repo from my Freeplane Groovy scripts I've been creating and using over the years.
+Here I want to build a repo from the Freeplane Groovy scripts I've been creating and using over the years.
 
 about Freeplane: https://www.freeplane.org
 
@@ -21,9 +21,9 @@ scriptxx.groovy | description of the script and a link to its [folder](/folder)
 
 ## TODO list:
 
-[] create folder with basic information about scripts, freeplane, groovy, etc
-[] import scripts one by one
-[] other Freeplane Scripts I want to look at in the future:
+- [ ] create folder with basic information about scripts, freeplane, groovy, etc
+- [ ] import scripts one by one
+- [ ] other Freeplane Scripts I want to look at in the future:
 
 * https://github.com/gotohr/freeplane-scripts
 * https://github.com/sandeep-datta/freeplane_scripts
