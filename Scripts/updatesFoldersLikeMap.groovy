@@ -1,29 +1,33 @@
 // @ExecutionModes({ON_SINGLE_NODE="/main_menu/ScriptsEdo/OrganizarMapa"})
 
 
+//----------------------------------------------main----------------------------------
 def nodo = node
-
-// correctFolderName(nodo)
 // ui.informationMessage(correctFolderName(nodo))
-
-baseFolderNode = obtainBaseFolder(nodo)
-baseFolderPath = linkPath(baseFolderNode)
-
-// ui.informationMessage(isPositionOK(nodo).toString())
 // ui.informationMessage(hasCloneWhithPositionOK(nodo).toString())
 
-def fileList = baseFolderNode.find{it.link.text && isLinkToFile(it.link.text) && !it.hasStyle('file_folder')}
-def folderList = baseFolderNode.find{it.hasStyle('file_folder')}.reverse()
+baseFolderNode = obtainBaseFolder(nodo)
+//ui.informationMessage(baseFolderNode.toString())
+if(baseFolderNode){
+	baseFolderPath = getLink(baseFolderNode)
+	//ui.informationMessage(baseFolderPath.toString())
+
+	def fileList = baseFolderNode.find{it.link.file && !it.hasStyle('file_folder')}
+	def folderList = baseFolderNode.find{it.hasStyle('file_folder')}.reverse()
+
+	foldersToDelete =[]
+	ui.informationMessage(" checking ${fileList.size().toString()} files amd ${folderList.size().toString()} folders in: \n\n ${baseFolderPath} \n\n\n")
+	moveFiles(fileList)
+	updateFolders(folderList)
+} else {
+	ui.informationMessage("No 'base folder' found between Rootnode and selected node")
+}
 
 
-ui.informationMessage(" checking ${fileList.size().toString()} files amd ${folderList.size().toString()} folders in: \n\n ${baseFolderPath} \n\n\n")
+//---------------------------------------level 01------------------------------------------
 
-moveFiles(fileList)
-//moveFiles(nodo)
-updateFolders(folderList)
-
-//*
-
+// FILES:
+// loops all the files and moves and renames them
 def moveFiles(files){
 	def notMoved = 0
 	def moved = 0
@@ -45,6 +49,7 @@ def moveFiles(files){
 				break
 		}
 	}
+	// informationMessage about files operations
 	def Texto=""
 	if(moved>0){Texto = Texto << "${moved} files were moved \n"}
 	if(notMoved>0){Texto = Texto << "${notMoved} files didn't need to be moved \n"}
@@ -53,9 +58,61 @@ def moveFiles(files){
 	//Texto = Texto << "Posible diferencia por nodos clones \n"
 	ui.informationMessage(Texto.toString())
 }
-/* */
 
-//*
+//moves and renames file in the drive
+def moveThisFile(nodo) {
+	def previousFullPath = getLink(nodo)		//Toma nombre Inicial "previousFullPath" de link actual del nodo
+	
+	// dos opciones para definir el nuevo nombre del archivo:
+	// def nombre = previousFullPath.reverse().takeBefore('/').reverse() // 1. mantiene nombre seg�n link
+	def nombre = nodo.text // 2. toma nombre del texto del nodo. as� le podr�a cambiar de nombre tambi�n
+
+	// armar path de estructura de rama
+	def path = obtainPathFromMap(nodo)
+	def newFullPath = path + nombre
+
+	def file = new File(previousFullPath)
+	if (file.isFile()) 		//	�existe en el lugar que indica su link (y no es folderName)?
+	{
+		if (previousFullPath != newFullPath)		// �ruta y nombre nuevo y antiguo son diferentes?
+		{
+			if(!hasCloneWhithPositionOK(nodo)){			
+				createPath(path.toString())
+				// TODO: agregar try catch???
+				// ui.informationMessage('Nombre inicial: ' + previousFullPath)
+				// ui.informationMessage('Nombre final: ' + newFullPath)
+				file.renameTo( new File(newFullPath) )
+				//nodo.link.text = linkEncode(newFullPath)   // cambia link del nodo para que apunte a nueva ubicaci�n
+				setLink(nodo, newFullPath) // cambia link del nodo para que apunte a nueva ubicaci�n
+				// ui.informationMessage( "el archivo ${file.name} fue reubicado")
+				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+				return 'moved'
+			} else {
+				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}			
+			}
+		} else {
+		//ui.informationMessage( "el archivo ${file.name} no necesit� ser movido")
+		if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+		return 'notMoved'
+		}
+	} else {
+		file = new File(newFullPath)
+		if (file.isFile()) 		//	�existe ya en el lugar donde lo iba a mover (y no es folderName)?
+		{
+			// nodo.link.text = linkEncode(newFullPath)  // cambia link del nodo para que apunte a nueva ubicaci�n
+			setLink(nodo, newFullPath) // cambia link del nodo para que apunte a nueva ubicaci�n
+			if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+			return 'updated'
+		} else {
+			ui.informationMessage( "the file ${previousFullPath} doesn't exist")
+			if(!nodo.icons.contains('messagebox_warning')){nodo.icons.add('messagebox_warning')}
+			return 'noExiste'
+		}
+	}
+}
+
+// FOLDERS:
+// loops all the folders and update them
 def updateFolders(files){
 	def notMoved = 0
 	def unexistent = 0
@@ -81,6 +138,21 @@ def updateFolders(files){
 				break
 		}
 	}
+	//delete folders that couldn't be deleted before
+	if (foldersToDelete.size()>0){
+			if (foldersToDelete.size()>1){
+				def ftdr = foldersToDelete.reverse()
+				ftdr.remove(0)
+				foldersToDelete.add(ftdr)
+				foldersToDelete = foldersToDelete.flatten()
+			}
+		foldersToDelete.each{
+			def a = deleteFolder(it)
+			deleted += a
+			keeped -= a
+		}
+	}
+	// informationMessage about folder operations
 	def Texto=""
 	if(created>0){Texto = Texto << "${created} new folders created \n"}
 	if(notMoved>0){Texto = Texto << "${notMoved} folders didn't need to be moved \n"}
@@ -89,26 +161,35 @@ def updateFolders(files){
 	if(unexistent>0){Texto = Texto << "${unexistent} folders were not found \n"}
 	ui.informationMessage(Texto.toString())
 }
-/* */
 
-//*
+// updates the position of folder in the drive
 def updateThisFolder(nodo) {
-	def newFullPath = obtainPath(nodo).toString()
+	def newFullPath = obtainPathFromMap(nodo).toString()
 	if(nodo.link.text){
-		def previousFullPath = linkPath(nodo)		//Toma nombre Inicial "previousFullPath" de link actual del nodo
+		def previousFullPath = getLink(nodo)		//Toma nombre Inicial "previousFullPath" de link actual del nodo
 		if (previousFullPath != newFullPath)		// �ruta y nombre nuevo y antiguo son diferentes?
 		{ 
 			// ui.informationMessage('Nombre inicial: ' + previousFullPath.toString())
 			// ui.informationMessage('Nombre final: ' + newFullPath)
-			nodo.link.text = linkEncod(newFullPath) // cambiarle a nuevo link
+			// nodo.link.text = linkEncode(newFullPath)  // cambiarle a nuevo link
+			setLink(nodo, newFullPath)  // cambiarle a nuevo link
 			def file = new File(previousFullPath)
 			if (file.isDirectory()) 		//	�existe en el lugar que indica su link (y es folderName)?
 			{ 
-				if(isDirEmpty(previousFullPath)) // revisar si directorio est� vac�o
+				// if(isDirEmpty(previousFullPath)) // revisar si directorio est� vac�o
+				// {
+					// file.delete() //eliminar folderName en disco
+					// return 'previousDeleted'
+				// } else {
+					// foldersToDelete << previousFullPath
+					// return 'previousKeeped'				
+				// }
+				
+				if (deleteFolder(previousFullPath)==1)
 				{
-					file.delete() //eliminar folderName en disco
 					return 'previousDeleted'
 				} else {
+					foldersToDelete << previousFullPath
 					return 'previousKeeped'				
 				}
 			} else {
@@ -118,7 +199,8 @@ def updateThisFolder(nodo) {
 			return 'notMoved'
 		}
 	}else {	// si no tiene link --> ponerle link
-		nodo.link.text = linkEncod(newFullPath)
+		// nodo.link.text = linkEncode(newFullPath)  
+		setLink(nodo, newFullPath)
 		if(nodo.style.name=='file_folder'){
 			nodo.style.name = null
 		}
@@ -126,94 +208,48 @@ def updateThisFolder(nodo) {
 	}
 }
 
-/* */
-
-//*
-
-def moveThisFile(nodo) {
-	def previousFullPath = linkPath(nodo)		//Toma nombre Inicial "previousFullPath" de link actual del nodo
-	
-	// dos opciones para definir el nuevo nombre del archivo:
-	// def nombre = previousFullPath.reverse().takeBefore('/').reverse() // 1. mantiene nombre seg�n link
-	def nombre = nodo.text // 2. toma nombre del texto del nodo. as� le podr�a cambiar de nombre tambi�n
-
-	// armar path de estructura de rama
-	def path = obtainPath(nodo)
-	def newFullPath = path + nombre
-
-	def file = new File(previousFullPath)
-	if (file.isFile()) 		//	�existe en el lugar que indica su link (y no es folderName)?
+//deletes folder
+def deleteFolder(folderPath){
+	if(isDirEmpty(folderPath)) // revisar si directorio est� vac�o
 	{
-		if (previousFullPath != newFullPath)		// �ruta y nombre nuevo y antiguo son diferentes?
-		{
-			if(!hasCloneWhithPositionOK(nodo)){			
-				createPath(path.toString())
-				// TODO: agregar try catch???
-				// ui.informationMessage('Nombre inicial: ' + previousFullPath)
-				// ui.informationMessage('Nombre final: ' + newFullPath)
-				file.renameTo( new File(newFullPath) )
-				nodo.link.text = linkEncod(newFullPath)  // cambia link del nodo para que apunte a nueva ubicaci�n
-				// ui.informationMessage( "el archivo ${file.name} fue reubicado")
-				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
-				return 'moved'
-			} else {
-				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}			
-			}
-		} else {
-		//ui.informationMessage( "el archivo ${file.name} no necesit� ser movido")
-		if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
-		return 'notMoved'
-		}
+		def file = new File(folderPath)
+		if(!file.delete()){
+			sleep(100)
+		} //eliminar folderName en disco
+		return 1
 	} else {
-		file = new File(newFullPath)
-		if (file.isFile()) 		//	�existe ya en el lugar donde lo iba a mover (y no es folderName)?
-		{
-			nodo.link.text = linkEncod(newFullPath)  // cambia link del nodo para que apunte a nueva ubicaci�n
-			if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
-			return 'updated'
-		} else {
-			ui.informationMessage( "the file ${previousFullPath} doesn't exist")
-			if(!nodo.icons.contains('messagebox_warning')){nodo.icons.add('messagebox_warning')}
-			return 'noExiste'
-		}
+		return 0
 	}
 }
 
-def hasCloneWhithPositionOK(n){
-	return n.countNodesSharingContent>0 && n.nodesSharingContent.any{h -> linkPath(h) == (obtainPath(h) + h.text) }
+
+// -------------------------------------level 02-------------------------------------------------- 
+
+// function, returns Node ("Base folder") under the selected node
+	// the first node which has a link to a file directory and has style 'file_folder'
+def obtainBaseFolder(n) {
+	// ui.informationMessage(n.pathToRoot.toString())
+	return n.pathToRoot.find{it.link?.file?.isDirectory() && it.hasStyle('file_folder') && it.icons.contains('bookmark')}
 }
 
-def isPositionOK(h){
-	return linkPath(h) == (obtainPath(h) + h.text)
-}
-
-/* */
-
-def linkEncod(texto){
-	return 'file:/' << texto.replace(' ','%20')
-}
-
-/* */
-def linkPath(n) {
-	def texto = n.link.text
-	if(texto){
-		texto = URLDecoder.decode(texto)
-		if (isLinkToFile(texto)){
-			texto = texto.drop(6) //.replace('/','\\')
-		}
+// function, returns string, returns path to the file linked in the node
+def getLink(n){
+	if(n.link.file){
+		return n.link.uri.path.drop(1)
 	} else {
-	texto = ''
+		return ''
 	}
-	return texto.toString()
 }
 
-def isLinkToFile(t){
-	def txt = t.toString()
-	return txt.size()>6 && txt[0..5]=='file:/'
+//adds a link to a file to the node
+def setLink(n, addr){
+	n.link.file = new File(addr.toString())
 }
 
-def obtainPath(n) {
-	def texto ='' // = n.text
+//function, returns string, builds the new path string by looking at the position of the node in the mindmap
+//it uses all the file-folder styled nodes till the base node
+def obtainPathFromMap(n) {
+	def texto =''
 	while(!n.equals(baseFolderNode)){
 		if(n.hasStyle('file_folder')){
 			texto = correctFolderName(n) << '/' << texto
@@ -224,16 +260,21 @@ def obtainPath(n) {
 	return texto.toString()
 }
 
+//function, returns string, looks at text in node and correct it if it can't be used as a foldername
 def correctFolderName(n){
-	def texto = n.text.trim().replace('/','-').replace('\\','-').replace('.','-')
-	n.text = texto
-	return texto.toString()
+	def texto = n.text.trim().replace('/','-').replace('\\','-').replace('.','-') //replaces chars not usefull in an Folder name
+	n.text = texto //corrects text in node too
+	return texto.toString() // returns the corrected text
 }
 
-def obtainBaseFolder(n) {
-	return n.pathToRoot.find{it.icons.contains('bookmark')}
+//function, boolean, it returns true if the node has a clone which position in disk is equivalent as its position in the map
+// when a node linked to a file is cloned in multiple places, not all position in the map will be consistent with its position in the drive.
+// Only one of them must be in the right place to consider that all the clones are placed OK
+def hasCloneWhithPositionOK(n){
+	return n.countNodesSharingContent>0 && n.nodesSharingContent.any{h -> getLink(h) == (obtainPathFromMap(h) + h.text) }
 }
 
+// create all folders of a path (if they doesn't exist)
 def createPath(String p) {
 	def folders = p.split('/')
 	def path =''
@@ -243,6 +284,7 @@ def createPath(String p) {
 	}	
 }
 
+// create new folder if it doesn't exist
 def createFolder(String folderName) {
 	def folder = new File(folderName)
 	if (!folder.isDirectory()){
@@ -250,12 +292,9 @@ def createFolder(String folderName) {
 	}
 }
 
+// function boolean - is directory empty?? 
 def isDirEmpty(dirName) {
     def dir = new File(dirName)
     dir.exists() && dir.directory && (dir.list() as List).empty
 }
-
-/* */
-//ui.informationMessage( newFullPath)
-
 

@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="Example MAP" FOLDED="false" ID="ID_819943156" CREATED="1590784750245" MODIFIED="1590784858050">
 <edge DASH="SOLID"/>
-<hook NAME="MapStyle">
+<hook NAME="MapStyle" zoom="1.1">
     <conditional_styles>
         <conditional_style ACTIVE="true" STYLE_REF="file_ppt" LAST="true">
             <hyper_link_contains TEXT=".ppt"/>
@@ -151,7 +151,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<node TEXT="Instructions" STYLE_REF="Organizador" POSITION="right" ID="ID_1687633798" CREATED="1590789587612" MODIFIED="1590791056779"><richcontent TYPE="NOTE">
+<node TEXT="Instructions" STYLE_REF="Organizador" FOLDED="true" POSITION="right" ID="ID_1687633798" CREATED="1590789587612" MODIFIED="1590791056779"><richcontent TYPE="NOTE">
 
 <html>
   <head>
@@ -554,142 +554,77 @@
 </richcontent>
 </node>
 </node>
-<node TEXT="actions" LOCALIZED_STYLE_REF="default" POSITION="left" ID="ID_285782579" CREATED="1590792196474" MODIFIED="1590806643247">
+<node TEXT="testFolder" POSITION="right" ID="ID_1185882537" CREATED="1590793502579" MODIFIED="1591060876046" LINK="file:/C:/Temp/testFolder/">
+<icon BUILTIN="bookmark"/>
+<node TEXT="Manual_freeplane.pdf" ID="ID_323868643" CREATED="1591064075958" MODIFIED="1591064075960" LINK="file:/C:/Temp/testFolder/Manual_freeplane.pdf"/>
+<node TEXT="20200403_COVID-19 Response_vSHARED.pdf" ID="ID_1507114017" CREATED="1591064075879" MODIFIED="1591064075882" LINK="file:/C:/Temp/testFolder/20200403_COVID-19%20Response_vSHARED.pdf"/>
+<node TEXT="Audiobooks" ID="ID_176030905" CREATED="1591064219501" MODIFIED="1591064711399">
+<node TEXT="La isla del tesoro.mp3" ID="ID_1037841027" CREATED="1591064075955" MODIFIED="1591064723101" LINK="file:/C:/Temp/testFolder/La%20isla%20del%20tesoro.mp3"/>
+<node TEXT="Blade runner.mp3" ID="ID_19882897" CREATED="1591064075891" MODIFIED="1591064723109" LINK="file:/C:/Temp/testFolder/Blade%20runner.mp3"/>
+</node>
+<node TEXT="boletos de bus" ID="ID_1109485483" CREATED="1591064138281" MODIFIED="1591064707043">
+<node TEXT="boleto bus de Stgo a Valpo.pdf" STYLE_REF="Siguiente tarea" ID="ID_362644090" CREATED="1591064075895" MODIFIED="1591064723125" LINK="file:/C:/Temp/testFolder/boleto%20bus%20de%20Stgo%20a%20Valpo.pdf"/>
+<node TEXT="" ID="ID_887576594" CREATED="1591064384111" MODIFIED="1591064384111">
+<hook NAME="FirstGroupNode"/>
+</node>
+<node TEXT="boletos (1).pdf" ID="ID_1408178904" CREATED="1591064075898" MODIFIED="1591064723140" LINK="file:/C:/Temp/testFolder/boletos%20(1).pdf"/>
+<node TEXT="boletos (2).pdf" ID="ID_1369358815" CREATED="1591064075903" MODIFIED="1591064723158" LINK="file:/C:/Temp/testFolder/boletos%20(2).pdf"/>
+<node TEXT="" ID="ID_277296520" CREATED="1591064384111" MODIFIED="1591064384111">
+<hook NAME="SummaryNode"/>
+<hook NAME="AlwaysUnfoldedNode"/>
+<node TEXT="revisar" STYLE_REF="Tarea pendiente" ID="ID_1971815500" CREATED="1591064384111" MODIFIED="1591064407464"/>
+</node>
+<node TEXT="to Stgo" STYLE_REF="Organizador" ID="ID_36919308" CREATED="1591064333980" MODIFIED="1591064347517">
+<node TEXT="boletos-g1 (1).pdf" ID="ID_521016296" CREATED="1591064075907" MODIFIED="1591064723169" LINK="file:/C:/Temp/testFolder/boletos-g1%20(1).pdf"/>
+<node TEXT="boletos-g1.pdf" ID="ID_89956166" CREATED="1591064075910" MODIFIED="1591064723179" LINK="file:/C:/Temp/testFolder/boletos-g1.pdf"><richcontent TYPE="NOTE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      jgsdfkgyds siudsa dsilsldgds
+    </p>
+  </body>
+</html>
+
+</richcontent>
+</node>
+<node TEXT="boletos-g1x.pdf" ID="ID_672737844" CREATED="1591064075914" MODIFIED="1591064723189" LINK="file:/C:/Temp/testFolder/boletos-g1x.pdf"/>
+<node TEXT="boletos.pdf" ID="ID_1554252355" CREATED="1591064075917" MODIFIED="1591064723199" LINK="file:/C:/Temp/testFolder/boletos.pdf"/>
+</node>
+</node>
+<node TEXT="BPM" ID="ID_843119914" CREATED="1591064168431" MODIFIED="1591064703746">
+<node TEXT="BPMN-2.0-Poster-DE.pdf" ID="ID_1358453227" CREATED="1591064075920" MODIFIED="1591064723207" LINK="file:/C:/Temp/testFolder/BPMN-2.0-Poster-DE.pdf"/>
+<node TEXT="SCCC2017-TrackBPM-paper-ID-64pdf.pdf" ID="ID_1996230535" CREATED="1591064075961" MODIFIED="1591064723227" LINK="file:/C:/Temp/testFolder/SCCC2017-TrackBPM-paper-ID-64pdf.pdf"/>
+<node TEXT="Business Process Management For Dummies.pdf" ID="ID_43271473" CREATED="1591064075923" MODIFIED="1591064723239" LINK="file:/C:/Temp/testFolder/Business%20Process%20Management%20For%20Dummies.pdf"/>
+<node TEXT="Business_Process_Management_Report_from_IT_Central_Station_2019-03-09.pdf" ID="ID_960516705" CREATED="1591064075929" MODIFIED="1591064723249" LINK="file:/C:/Temp/testFolder/Business_Process_Management_Report_from_IT_Central_Station_2019-03-09.pdf"/>
+<node TEXT="Business_Process_Management_Shortlist_from_IT_Central_Station_2019-04-09.pdf" ID="ID_407906763" CREATED="1591064075937" MODIFIED="1591064723267" LINK="file:/C:/Temp/testFolder/Business_Process_Management_Shortlist_from_IT_Central_Station_2019-04-09.pdf"/>
+<node TEXT="Industry4.0ChallengesforBusinessProcessManagement.pdf" ID="ID_1816996201" CREATED="1591064075944" MODIFIED="1591064723279" LINK="file:/C:/Temp/testFolder/Industry4.0ChallengesforBusinessProcessManagement.pdf"/>
+<node TEXT="Signavio-Kochbuch-WEB.pdf" ID="ID_509058399" CREATED="1591064075968" MODIFIED="1591064723289" LINK="file:/C:/Temp/testFolder/Signavio-Kochbuch-WEB.pdf"/>
+<node TEXT="BDM-Poster-DE.pdf" ID="ID_313521498" CREATED="1591064075888" MODIFIED="1591064723299" LINK="file:/C:/Temp/testFolder/BDM-Poster-DE.pdf"/>
+</node>
+<node TEXT="SQL" ID="ID_892090574" CREATED="1591064123454" MODIFIED="1591064697547">
+<node TEXT="SQL Joins.jpeg" ID="ID_1954774408" CREATED="1591064075972" MODIFIED="1591064723310" LINK="file:/C:/Temp/testFolder/SQL%20Joins.jpeg"/>
+<node TEXT="SQL logical order.png" ID="ID_1991670431" CREATED="1591064075975" MODIFIED="1591064723320" LINK="file:/C:/Temp/testFolder/SQL%20logical%20order.png"/>
+<node TEXT="SQL Server 2019 Editions Datasheet.pdf" ID="ID_966256339" CREATED="1591064075977" MODIFIED="1591064723330" LINK="file:/C:/Temp/testFolder/SQL%20Server%202019%20Editions%20Datasheet.pdf"/>
+<node TEXT="SQL Union_Except_Intersect.png" ID="ID_1407977488" CREATED="1591064075979" MODIFIED="1591064723348" LINK="file:/C:/Temp/testFolder/SQL%20Union_Except_Intersect.png"/>
+<node TEXT="sql-cheat-sheet (otra).pdf" ID="ID_150248400" CREATED="1591064075983" MODIFIED="1591064723350" LINK="file:/C:/Temp/testFolder/sql-cheat-sheet%20(otra).pdf"/>
+<node TEXT="SQL-cheat-sheet.pdf" ID="ID_332020226" CREATED="1591064075986" MODIFIED="1591064723360" LINK="file:/C:/Temp/testFolder/SQL-cheat-sheet.pdf"/>
+<node TEXT="SQL-Commands-Cheat-Sheet.pdf" ID="ID_3053818" CREATED="1591064075989" MODIFIED="1591064723370" LINK="file:/C:/Temp/testFolder/SQL-Commands-Cheat-Sheet.pdf"/>
+<node TEXT="sql-data-type.pdf" ID="ID_1010596026" CREATED="1591064075991" MODIFIED="1591064723380" LINK="file:/C:/Temp/testFolder/sql-data-type.pdf"/>
+<node TEXT="sql.png" ID="ID_576677762" CREATED="1591064075994" MODIFIED="1591064723390" LINK="file:/C:/Temp/testFolder/sql.png"/>
+<node TEXT="TSQL-STRING-FUNCTIONS-CHEAT-SHEET.pdf" ID="ID_1448611593" CREATED="1591064075997" MODIFIED="1591064723400" LINK="file:/C:/Temp/testFolder/TSQL-STRING-FUNCTIONS-CHEAT-SHEET.pdf"/>
+<node TEXT="joincheatsheet.pdf" ID="ID_415972925" CREATED="1591064075952" MODIFIED="1591064723408" LINK="file:/C:/Temp/testFolder/joincheatsheet.pdf"/>
+<node TEXT="ShortcutsCheatSheet_18.1.pdf" ID="ID_627175959" CREATED="1591064075965" MODIFIED="1591064723418" LINK="file:/C:/Temp/testFolder/ShortcutsCheatSheet_18.1.pdf"/>
+</node>
+</node>
+<node TEXT="actions" STYLE_REF="Proyecto" POSITION="left" ID="ID_285782579" CREATED="1590792196474" MODIFIED="1591034484798">
 <node TEXT="Add Bookmark icon to selected node" ID="ID_535403633" CREATED="1590792227680" MODIFIED="1590792326177" LINK="menuitem:_IconAction.bookmark" MAX_WIDTH="250.0 px" MIN_WIDTH="250.0 px"/>
 <node TEXT="open Import Folder Structure dialog" ID="ID_515440681" CREATED="1590792432657" MODIFIED="1590792468101" LINK="menuitem:_ImportFolderStructureAction" MAX_WIDTH="250.0 px" MIN_WIDTH="250.0 px"/>
 <node TEXT="give node &apos;file_folder&apos; style" ID="ID_1141821658" CREATED="1590806506996" MODIFIED="1590806590678" LINK="menuitem:_AssignStyleAction.file_folder" MAX_WIDTH="250.0 px" MIN_WIDTH="250.0 px"/>
 <node TEXT="update Folders" ID="ID_1825013198" CREATED="1590789533275" MODIFIED="1590792326181" LINK="menuitem:_UpdatesFoldersLikeMap2_on_single_node" MAX_WIDTH="250.0 px" MIN_WIDTH="250.0 px"/>
-</node>
-<node TEXT="testFolder" FOLDED="true" POSITION="right" ID="ID_1185882537" CREATED="1590793502579" MODIFIED="1590794176769" LINK="file:/C:/Temp/testFolder/">
-<icon BUILTIN="bookmark"/>
-<node TEXT="122-32335-Shield-Bot-web-v1.1.pdf" ID="ID_1829309519" CREATED="1590794496534" MODIFIED="1590794496537" LINK="file:/C:/Temp/testFolder/122-32335-Shield-Bot-web-v1.1.pdf"/>
-<node TEXT="20200403_COVID-19 Response_vSHARED.pdf" ID="ID_323425924" CREATED="1590794496541" MODIFIED="1590794496543" LINK="file:/C:/Temp/testFolder/20200403_COVID-19%20Response_vSHARED.pdf"/>
-<node TEXT="35000-BOE-Shield-Documentation-v1.2.pdf" ID="ID_1159667765" CREATED="1590794496548" MODIFIED="1590794496550" LINK="file:/C:/Temp/testFolder/35000-BOE-Shield-Documentation-v1.2.pdf"/>
-<node TEXT="35000-BOE-Shield-Schematic-RevB.pdf" ID="ID_393524264" CREATED="1590794496551" MODIFIED="1590794496554" LINK="file:/C:/Temp/testFolder/35000-BOE-Shield-Schematic-RevB.pdf"/>
-<node TEXT="3DSystems-RapidPrototyping_eBook_EN-FINAL.pdf" ID="ID_1102782033" CREATED="1590794496556" MODIFIED="1590794496561" LINK="file:/C:/Temp/testFolder/3DSystems-RapidPrototyping_eBook_EN-FINAL.pdf"/>
-<node TEXT="Arduino + Blockly.pdf" ID="ID_1396493028" CREATED="1590794496565" MODIFIED="1590794961792" LINK="file:/C:/Temp/testFolder/Arduino%20+%20Blockly.pdf"/>
-<node TEXT="BAGCorfo2018_Guia,4.pdf" ID="ID_1840614114" CREATED="1590794496568" MODIFIED="1590794496570" LINK="file:/C:/Temp/testFolder/BAGCorfo2018_Guia,4.pdf"/>
-<node TEXT="Bases+Administrativas+Generales+InnovaChile.pdf" ID="ID_1834550036" CREATED="1590794496571" MODIFIED="1590794961831" LINK="file:/C:/Temp/testFolder/Bases+Administrativas+Generales+InnovaChile.pdf"/>
-<node TEXT="Bases+Técnicas+Innova+Región.PDF" ID="ID_137909788" CREATED="1590794496580" MODIFIED="1590794961859" LINK="file:/C:/Temp/testFolder/Bases+Técnicas+Innova+Región.PDF"/>
-<node TEXT="Bases+Técnicas+Súmate+a+Innovar.PDF" ID="ID_13098029" CREATED="1590794496584" MODIFIED="1590794961889" LINK="file:/C:/Temp/testFolder/Bases+Técnicas+Súmate+a+Innovar.PDF"/>
-<node TEXT="BDM-Poster-DE.pdf" ID="ID_1278803970" CREATED="1590794496587" MODIFIED="1590794496589" LINK="file:/C:/Temp/testFolder/BDM-Poster-DE.pdf"/>
-<node TEXT="Blade runner.mp3" ID="ID_361937657" CREATED="1590794496590" MODIFIED="1590794496593" LINK="file:/C:/Temp/testFolder/Blade%20runner.mp3"/>
-<node TEXT="board-of-innovation-low-touch-economy.pdf" ID="ID_762699385" CREATED="1590794496595" MODIFIED="1590794496597" LINK="file:/C:/Temp/testFolder/board-of-innovation-low-touch-economy.pdf"/>
-<node TEXT="BPMN-2.0-Poster-DE.pdf" ID="ID_583098290" CREATED="1590794496620" MODIFIED="1590794496622" LINK="file:/C:/Temp/testFolder/BPMN-2.0-Poster-DE.pdf"/>
-<node TEXT="Business Process Management For Dummies.pdf" ID="ID_155036975" CREATED="1590794496623" MODIFIED="1590794496627" LINK="file:/C:/Temp/testFolder/Business%20Process%20Management%20For%20Dummies.pdf"/>
-<node TEXT="Business_Process_Management_Report_from_IT_Central_Station_2019-03-09.pdf" ID="ID_1293299262" CREATED="1590794496630" MODIFIED="1590794496634" LINK="file:/C:/Temp/testFolder/Business_Process_Management_Report_from_IT_Central_Station_2019-03-09.pdf"/>
-<node TEXT="Business_Process_Management_Shortlist_from_IT_Central_Station_2019-04-09.pdf" ID="ID_1958032538" CREATED="1590794496637" MODIFIED="1590794496643" LINK="file:/C:/Temp/testFolder/Business_Process_Management_Shortlist_from_IT_Central_Station_2019-04-09.pdf"/>
-<node TEXT="Comprobante de Reserva de Horas - Clínica Alemana ·[__www.alemana.cl_]·.pdf" ID="ID_795451577" CREATED="1590794496647" MODIFIED="1590794496651" LINK="file:/C:/Temp/testFolder/Comprobante%20de%20Reserva%20de%20Horas%20-%20Clínica%20Alemana%20·%5B__www.alemana.cl_%5D·.pdf"/>
-<node TEXT="ComprobantePago - 012592256-2 (2).pdf" ID="ID_1523150764" CREATED="1590794496656" MODIFIED="1590794496659" LINK="file:/C:/Temp/testFolder/ComprobantePago%20-%20012592256-2%20(2).pdf"/>
-<node TEXT="ComprobantePago - 012592256-2.pdf" ID="ID_1433427248" CREATED="1590794496660" MODIFIED="1590794496662" LINK="file:/C:/Temp/testFolder/ComprobantePago%20-%20012592256-2.pdf"/>
-<node TEXT="Boletas" STYLE_REF="file_folder" ID="ID_1032951278" CREATED="1590806681790" MODIFIED="1590807559647">
-<node TEXT="" ID="ID_812963797" CREATED="1590807940126" MODIFIED="1590807940130">
-<hook NAME="FirstGroupNode"/>
-</node>
-<node TEXT="boletos (1).pdf" ID="ID_1992466828" CREATED="1590794496598" MODIFIED="1590794496600" LINK="file:/C:/Temp/testFolder/boletos%20(1).pdf"/>
-<node TEXT="boletos (2).pdf" ID="ID_1037721454" CREATED="1590794496601" MODIFIED="1590794496603" LINK="file:/C:/Temp/testFolder/boletos%20(2).pdf"/>
-<node TEXT="boleto bus de Stgo a Valpo.pdf" ID="ID_83039464" CREATED="1590794496604" MODIFIED="1590808618908" LINK="file:/C:/Temp/testFolder/boletos(8).pdf"/>
-<node TEXT="" ID="ID_1416111934" CREATED="1590807940119" MODIFIED="1590807940125">
-<hook NAME="SummaryNode"/>
-<hook NAME="AlwaysUnfoldedNode"/>
-<node TEXT="Bus Ticket" ID="ID_375137294" CREATED="1590807940135" MODIFIED="1590808208626" BACKGROUND_COLOR="#99ff99"/>
-</node>
-<node TEXT="boletos-g1 (1).pdf" ID="ID_787463800" CREATED="1590794496608" MODIFIED="1590808108050" LINK="file:/C:/Temp/testFolder/boletos-g1%20(1).pdf"><richcontent TYPE="DETAILS">
-
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      ¿who took this?
-    </p>
-  </body>
-</html>
-
-</richcontent>
-</node>
-<node TEXT="ToDo: OK???" STYLE_REF="Tarea pendiente" ID="ID_481302914" CREATED="1590807767677" MODIFIED="1590807873259">
-<node TEXT="boletos-g1.pdf" ID="ID_1061258709" CREATED="1590794496612" MODIFIED="1590808182822" LINK="file:/C:/Temp/testFolder/boletos-g1.pdf"><richcontent TYPE="NOTE">
-
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      Válido para la fecha y hora señalada. La devolución o cambio se aceptará hasta 4 horas antes del viaje (art. 67. D. S.
-    </p>
-    <p>
-      212/92MT). Si canceló en efectivo, con tarjeta de crédito, débito u otra, se devolverá el 85% del valor, si canceló con cheque,
-    </p>
-    <p>
-      se devolverá 85% del valor 10 días después que se haya cobrado y percibido, previa anulación del boleto antes del viaje, en
-    </p>
-    <p>
-      oficinas con venta en línea. Si el valor de su equipaje excede 5 UTM es su obligación declararlo previamente en la oficina de
-    </p>
-    <p>
-      origen (art. 70 D.S 212/92 MT). La empresa no se hace responsable por pérdidas que puedan ocurrir al interior del bus. El
-    </p>
-    <p>
-      horario de llegada es estimado. Los boletos no confirmados tendrán una vigencia de 3 meses desde la fecha de venta. No se
-    </p>
-    <p>
-      aceptarán boletos rotos o con adulteración.
-    </p>
-  </body>
-</html>
-
-</richcontent>
-</node>
-<node TEXT="boletos-g1x.pdf" ID="ID_272221188" CREATED="1590794496614" MODIFIED="1590794496616" LINK="file:/C:/Temp/testFolder/boletos-g1x.pdf">
-<node TEXT="boletos.pdf" ID="ID_831007218" CREATED="1590794496617" MODIFIED="1590808263921" LINK="file:/C:/Temp/testFolder/boletos.pdf"><richcontent TYPE="DETAILS">
-
-<html>
-  <head>
-    
-  </head>
-  <body>
-    <p>
-      it's the same
-    </p>
-  </body>
-</html>
-
-</richcontent>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="Estado de Cuenta CMR_052019_0203954.pdf" ID="ID_548522737" CREATED="1590794496663" MODIFIED="1590794496665" LINK="file:/C:/Temp/testFolder/Estado%20de%20Cuenta%20CMR_052019_0203954.pdf"/>
-<node TEXT="IM_Design_Essentials_WP_18.pdf" ID="ID_1186944254" CREATED="1590794496669" MODIFIED="1590794496672" LINK="file:/C:/Temp/testFolder/IM_Design_Essentials_WP_18.pdf"/>
-<node TEXT="Industry4.0ChallengesforBusinessProcessManagement.pdf" ID="ID_530367744" CREATED="1590794496674" MODIFIED="1590794496680" LINK="file:/C:/Temp/testFolder/Industry4.0ChallengesforBusinessProcessManagement.pdf"/>
-<node TEXT="InstruccionCargo_012592256-2.pdf" ID="ID_7286963" CREATED="1590794496683" MODIFIED="1590794496685" LINK="file:/C:/Temp/testFolder/InstruccionCargo_012592256-2.pdf"/>
-<node TEXT="joincheatsheet.pdf" ID="ID_204231113" CREATED="1590794496687" MODIFIED="1590794496689" LINK="file:/C:/Temp/testFolder/joincheatsheet.pdf"/>
-<node TEXT="La isla del tesoro.mp3" ID="ID_1960873489" CREATED="1590794496691" MODIFIED="1590794496695" LINK="file:/C:/Temp/testFolder/La%20isla%20del%20tesoro.mp3"/>
-<node TEXT="Manual EasyArduino.pdf" ID="ID_644475012" CREATED="1590794496697" MODIFIED="1590794496701" LINK="file:/C:/Temp/testFolder/Manual%20EasyArduino.pdf"/>
-<node TEXT="Manual_freeplane.pdf" ID="ID_1906002498" CREATED="1590794496702" MODIFIED="1590794496705" LINK="file:/C:/Temp/testFolder/Manual_freeplane.pdf"/>
-<node TEXT="Parallax-Small-Robot-Comparison-Chart-v2.0.pdf" ID="ID_824792449" CREATED="1590794496707" MODIFIED="1590794496711" LINK="file:/C:/Temp/testFolder/Parallax-Small-Robot-Comparison-Chart-v2.0.pdf"/>
-<node TEXT="Petzold_et_al-2019-Creativity_and_Innovation_Management.pdf" ID="ID_749738254" CREATED="1590794496716" MODIFIED="1590794496722" LINK="file:/C:/Temp/testFolder/Petzold_et_al-2019-Creativity_and_Innovation_Management.pdf"/>
-<node TEXT="PreguntasFrecuentesProgramasDeInnovacion.pdf" ID="ID_1862115700" CREATED="1590794496728" MODIFIED="1590794496731" LINK="file:/C:/Temp/testFolder/PreguntasFrecuentesProgramasDeInnovacion.pdf"/>
-<node TEXT="RTP-Part-Design-Guidelines-for-Injection-Molded-Thermoplastics.pdf" ID="ID_1106061478" CREATED="1590794496735" MODIFIED="1590794496739" LINK="file:/C:/Temp/testFolder/RTP-Part-Design-Guidelines-for-Injection-Molded-Thermoplastics.pdf"/>
-<node TEXT="SCCC2017-TrackBPM-paper-ID-64pdf.pdf" ID="ID_282093215" CREATED="1590794496743" MODIFIED="1590794496745" LINK="file:/C:/Temp/testFolder/SCCC2017-TrackBPM-paper-ID-64pdf.pdf"/>
-<node TEXT="Sergeeva_et_al-2018-Creativity_and_Innovation_Management.pdf" ID="ID_758687254" CREATED="1590794496746" MODIFIED="1590794496751" LINK="file:/C:/Temp/testFolder/Sergeeva_et_al-2018-Creativity_and_Innovation_Management.pdf"/>
-<node TEXT="ShortcutsCheatSheet_18.1.pdf" ID="ID_1277743037" CREATED="1590794496755" MODIFIED="1590794496758" LINK="file:/C:/Temp/testFolder/ShortcutsCheatSheet_18.1.pdf"/>
-<node TEXT="Signavio-Kochbuch-WEB.pdf" ID="ID_748115401" CREATED="1590794496760" MODIFIED="1590794496763" LINK="file:/C:/Temp/testFolder/Signavio-Kochbuch-WEB.pdf"/>
-<node TEXT="SQL Joins.jpeg" ID="ID_1491722221" CREATED="1590794496764" MODIFIED="1590794496766" LINK="file:/C:/Temp/testFolder/SQL%20Joins.jpeg"/>
-<node TEXT="SQL logical order.png" ID="ID_592652772" CREATED="1590794496767" MODIFIED="1590794496769" LINK="file:/C:/Temp/testFolder/SQL%20logical%20order.png"/>
-<node TEXT="SQL Server 2019 Editions Datasheet.pdf" ID="ID_538479610" CREATED="1590794496771" MODIFIED="1590794496773" LINK="file:/C:/Temp/testFolder/SQL%20Server%202019%20Editions%20Datasheet.pdf"/>
-<node TEXT="SQL Union_Except_Intersect.png" ID="ID_1107935469" CREATED="1590794496775" MODIFIED="1590794496778" LINK="file:/C:/Temp/testFolder/SQL%20Union_Except_Intersect.png"/>
-<node TEXT="sql-cheat-sheet (otra).pdf" ID="ID_1267732926" CREATED="1590794496779" MODIFIED="1590794496780" LINK="file:/C:/Temp/testFolder/sql-cheat-sheet%20(otra).pdf"/>
-<node TEXT="SQL-cheat-sheet.pdf" ID="ID_166063076" CREATED="1590794496782" MODIFIED="1590794496784" LINK="file:/C:/Temp/testFolder/SQL-cheat-sheet.pdf"/>
-<node TEXT="SQL-Commands-Cheat-Sheet.pdf" ID="ID_1020207632" CREATED="1590794496785" MODIFIED="1590794496788" LINK="file:/C:/Temp/testFolder/SQL-Commands-Cheat-Sheet.pdf"/>
-<node TEXT="sql-data-type.pdf" ID="ID_802864638" CREATED="1590794496789" MODIFIED="1590794496792" LINK="file:/C:/Temp/testFolder/sql-data-type.pdf"/>
-<node TEXT="sql.png" ID="ID_388958750" CREATED="1590794496793" MODIFIED="1590794496796" LINK="file:/C:/Temp/testFolder/sql.png"/>
-<node TEXT="TenThingsWeveLearnedFromBlockly.pdf" ID="ID_1027572709" CREATED="1590794496797" MODIFIED="1590794496799" LINK="file:/C:/Temp/testFolder/TenThingsWeveLearnedFromBlockly.pdf"/>
-<node TEXT="TipsForCreatingABlockLanguage.pdf" ID="ID_920760680" CREATED="1590794496801" MODIFIED="1590794496803" LINK="file:/C:/Temp/testFolder/TipsForCreatingABlockLanguage.pdf"/>
-<node TEXT="TSQL-STRING-FUNCTIONS-CHEAT-SHEET.pdf" ID="ID_908454014" CREATED="1590794496805" MODIFIED="1590794496808" LINK="file:/C:/Temp/testFolder/TSQL-STRING-FUNCTIONS-CHEAT-SHEET.pdf"/>
 </node>
 </node>
 </map>
