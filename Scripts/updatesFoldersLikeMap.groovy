@@ -1,5 +1,10 @@
 // @ExecutionModes({ON_SINGLE_NODE="/main_menu/ScriptsEdo/OrganizarMapa"})
 
+/*
+ conditional style for Folder:
+	Script filter:
+		{node.link.uri != null && node.link.uri.scheme == 'file' && node.link.file.directory}
+*/
 
 //----------------------------------------------main----------------------------------
 def nodo = node
@@ -9,7 +14,7 @@ def nodo = node
 baseFolderNode = obtainBaseFolder(nodo)
 //ui.informationMessage(baseFolderNode.toString())
 if(baseFolderNode){
-	baseFolderPath = getLink(baseFolderNode)
+	baseFolderPath = getLink(baseFolderNode).toString()//.replace('\\','/')
 	//ui.informationMessage(baseFolderPath.toString())
 
 	def fileList = baseFolderNode.find{it.link.file && !it.hasStyle('file_folder')}
@@ -70,7 +75,7 @@ def moveThisFile(nodo) {
 	// armar path de estructura de rama
 	def path = obtainPathFromMap(nodo)
 	def newFullPath = path + nombre
-
+	
 	def file = new File(previousFullPath)
 	if (file.isFile()) 		//	�existe en el lugar que indica su link (y no es folderName)?
 	{
@@ -79,20 +84,20 @@ def moveThisFile(nodo) {
 			if(!hasCloneWhithPositionOK(nodo)){			
 				createPath(path.toString())
 				// TODO: agregar try catch???
-				// ui.informationMessage('Nombre inicial: ' + previousFullPath)
-				// ui.informationMessage('Nombre final: ' + newFullPath)
+				//ui.informationMessage("Nombre inicial:  ${previousFullPath} \n Nombre final  :  ${newFullPath}")
 				file.renameTo( new File(newFullPath) )
 				//nodo.link.text = linkEncode(newFullPath)   // cambia link del nodo para que apunte a nueva ubicaci�n
+				setLinkImage(nodo, newFullPath)
 				setLink(nodo, newFullPath) // cambia link del nodo para que apunte a nueva ubicaci�n
 				// ui.informationMessage( "el archivo ${file.name} fue reubicado")
-				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+				if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 				return 'moved'
 			} else {
-				if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}			
+				if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}			
 			}
 		} else {
 		//ui.informationMessage( "el archivo ${file.name} no necesit� ser movido")
-		if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+		if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 		return 'notMoved'
 		}
 	} else {
@@ -100,12 +105,13 @@ def moveThisFile(nodo) {
 		if (file.isFile()) 		//	�existe ya en el lugar donde lo iba a mover (y no es folderName)?
 		{
 			// nodo.link.text = linkEncode(newFullPath)  // cambia link del nodo para que apunte a nueva ubicaci�n
+			setLinkImage(nodo, newFullPath)
 			setLink(nodo, newFullPath) // cambia link del nodo para que apunte a nueva ubicaci�n
-			if(nodo.icons.contains('messagebox_warning')){nodo.icons.remove('messagebox_warning')}
+			if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 			return 'updated'
 		} else {
-			ui.informationMessage( "the file ${previousFullPath} doesn't exist")
-			if(!nodo.icons.contains('messagebox_warning')){nodo.icons.add('messagebox_warning')}
+			// ui.informationMessage( "the file ${previousFullPath} doesn't exist")
+			if(!nodo.icons.contains('broken-line')){nodo.icons.add('broken-line')}
 			return 'noExiste'
 		}
 	}
@@ -165,12 +171,11 @@ def updateFolders(files){
 // updates the position of folder in the drive
 def updateThisFolder(nodo) {
 	def newFullPath = obtainPathFromMap(nodo).toString()
-	if(nodo.link.text){
-		def previousFullPath = getLink(nodo)		//Toma nombre Inicial "previousFullPath" de link actual del nodo
+	if(nodo.link.file){
+		def previousFullPath = getLink(nodo) + '\\'		//Toma nombre Inicial "previousFullPath" de link actual del nodo
 		if (previousFullPath != newFullPath)		// �ruta y nombre nuevo y antiguo son diferentes?
 		{ 
-			// ui.informationMessage('Nombre inicial: ' + previousFullPath.toString())
-			// ui.informationMessage('Nombre final: ' + newFullPath)
+			// ui.informationMessage('Nombre inicial: ' + previousFullPath +'\n Nombre final : ' + newFullPath)
 			// nodo.link.text = linkEncode(newFullPath)  // cambiarle a nuevo link
 			setLink(nodo, newFullPath)  // cambiarle a nuevo link
 			def file = new File(previousFullPath)
@@ -185,6 +190,7 @@ def updateThisFolder(nodo) {
 					// return 'previousKeeped'				
 				// }
 				
+				if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 				if (deleteFolder(previousFullPath)==1)
 				{
 					return 'previousDeleted'
@@ -193,17 +199,18 @@ def updateThisFolder(nodo) {
 					return 'previousKeeped'				
 				}
 			} else {
+				if(!nodo.icons.contains('broken-line')){nodo.icons.add('broken-line')}
 				return 'noExiste'
 			}
 		} else { 
+			if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 			return 'notMoved'
 		}
 	}else {	// si no tiene link --> ponerle link
 		// nodo.link.text = linkEncode(newFullPath)  
 		setLink(nodo, newFullPath)
-		if(nodo.style.name=='file_folder'){
-			nodo.style.name = null
-		}
+		if(nodo.style.name=='file_folder'){nodo.style.name = null}
+		if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 		return 'new'
 	}
 }
@@ -235,7 +242,7 @@ def obtainBaseFolder(n) {
 // function, returns string, returns path to the file linked in the node
 def getLink(n){
 	if(n.link.file){
-		return n.link.uri.path.drop(1)
+		return n.link.file.path
 	} else {
 		return ''
 	}
@@ -243,7 +250,15 @@ def getLink(n){
 
 //adds a link to a file to the node
 def setLink(n, addr){
+	// ui.informationMessage(addr.toString())
 	n.link.file = new File(addr.toString())
+}
+
+//corrects link to image in node which is also a file in the project
+def setLinkImage(n, addr){
+	if(n.externalObject && n.link.file && n.link.text == n.externalObject.uri){
+		n.externalObject.file = new File(addr.toString())
+	}
 }
 
 //function, returns string, builds the new path string by looking at the position of the node in the mindmap
@@ -252,11 +267,11 @@ def obtainPathFromMap(n) {
 	def texto =''
 	while(!n.equals(baseFolderNode)){
 		if(n.hasStyle('file_folder')){
-			texto = correctFolderName(n) << '/' << texto
+			texto = correctFolderName(n) << '\\' << texto
 		}
 		n = n.parent
 	}
-	texto = baseFolderPath << texto
+	texto = baseFolderPath << '\\'  << texto
 	return texto.toString()
 }
 
@@ -276,7 +291,9 @@ def hasCloneWhithPositionOK(n){
 
 // create all folders of a path (if they doesn't exist)
 def createPath(String p) {
-	def folders = p.split('/')
+	//ui.informationMessage('createPath ' + p)
+	def folders = p.replace('\\','/').split('/')
+	//ui.informationMessage(folders.toString())
 	def path =''
 	folders.each{ String f ->
 		path = path << f  << '/'
