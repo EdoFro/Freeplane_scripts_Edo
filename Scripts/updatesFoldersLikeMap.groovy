@@ -1,23 +1,38 @@
 // @ExecutionModes({ON_SINGLE_NODE="/main_menu/ScriptsEdo/OrganizarMapa"})
 
 /*
- conditional style for Folder:
-	Script filter:
-		{node.link.uri != null && node.link.uri.scheme == 'file' && node.link.file.directory}
+ conditional style for Folder 'file_folder':
+ Script filter :
+	{node.link?.uri?.scheme == 'file' && (node.link.file?.exists()? node.link.file.directory : node.link.uri.path?.reverse()[0] == '/')}
 */
 
-//----------------------------------------------main----------------------------------
+//REVISE Y NO ES NECESARIO: utilizar función isLinkToMapNode(mylink) para que se salte ese tipo de nodos (nodos con link a nodos de otros mindmaps)
+/*
+TODO: tener la posibilidad de marcar nodos que no se quiera se considerne en el update:
+	- por ejemplo cuando se trae el link de un archivo como referencia pero no se quiere que se cambie de su ubicación original en el disco
+	-inclusive podría ser todos los nodos que estan dentro de un tipo especial de nodo
+		algo así como:
+		noConsiderar = baseFolderNode.find(false,true,{it.hasStyle('locked')})
+		fileList = fileList - noConsiderar
+*/
+
+//region: ----------------------------------------------main script----------------------------------
 def nodo = node
 // ui.informationMessage(correctFolderName(nodo))
 // ui.informationMessage(hasCloneWhithPositionOK(nodo).toString())
 
 baseFolderNode = obtainBaseFolder(nodo)
-//ui.informationMessage(baseFolderNode.toString())
+// ui.informationMessage(baseFolderNode.toString())
+
 if(baseFolderNode){
 	baseFolderPath = getLink(baseFolderNode).toString()//.replace('\\','/')
-	//ui.informationMessage(baseFolderPath.toString())
+	// ui.informationMessage(baseFolderPath.toString())
+	def	nodesToExclude = baseFolderNode.find(false,true,{it.hasStyle('locked')})
+	// ui.informationMessage(nodesToExclude.size().toString())
 
-	def fileList = baseFolderNode.find{it.link.file && !it.hasStyle('file_folder')}
+	def fileList = baseFolderNode.find{it.link.file && it.link.uri.scheme =='file' && !it.hasStyle('file_folder')}  - nodesToExclude
+	// ui.informationMessage(fileList.size().toString())
+
 	def folderList = baseFolderNode.find{it.hasStyle('file_folder')}.reverse()
 
 	foldersToDelete =[]
@@ -28,10 +43,11 @@ if(baseFolderNode){
 	ui.informationMessage("No 'base folder' found between Rootnode and selected node")
 }
 
+// end
 
-//---------------------------------------level 01------------------------------------------
+//region: ---------------------------------------level 01 methods/functions ------------------------------------------
 
-// FILES:
+//region: FILES:
 // loops all the files and moves and renames them
 def moveFiles(files){
 	def notMoved = 0
@@ -56,7 +72,7 @@ def moveFiles(files){
 	}
 	// informationMessage about files operations
 	def Texto=""
-	if(moved>0){Texto = Texto << "${moved} files were moved \n"}
+	if(moved>0){Texto = Texto << "${moved} files were moved/renamed \n"}
 	if(notMoved>0){Texto = Texto << "${notMoved} files didn't need to be moved \n"}
 	if(updated>0){Texto = Texto << "${updated} files didn't need to be moved but their links were corrected \n"}
 	if(unexistent>0){Texto = Texto << "${unexistent} files coudn't be found \n"}
@@ -117,7 +133,9 @@ def moveThisFile(nodo) {
 	}
 }
 
-// FOLDERS:
+//end
+
+//region: FOLDERS:
 // loops all the folders and update them
 def updateFolders(files){
 	def notMoved = 0
@@ -181,15 +199,6 @@ def updateThisFolder(nodo) {
 			def file = new File(previousFullPath)
 			if (file.isDirectory()) 		//	�existe en el lugar que indica su link (y es folderName)?
 			{ 
-				// if(isDirEmpty(previousFullPath)) // revisar si directorio est� vac�o
-				// {
-					// file.delete() //eliminar folderName en disco
-					// return 'previousDeleted'
-				// } else {
-					// foldersToDelete << previousFullPath
-					// return 'previousKeeped'				
-				// }
-				
 				if(nodo.icons.contains('broken-line')){nodo.icons.remove('broken-line')}
 				if (deleteFolder(previousFullPath)==1)
 				{
@@ -229,15 +238,19 @@ def deleteFolder(folderPath){
 	}
 }
 
+// end
+// end
 
-// -------------------------------------level 02-------------------------------------------------- 
-
+//region: -------------------------------------level 02 methods/functions -------------------------------------------------- 
+//region: functions initial setup
 // function, returns Node ("Base folder") under the selected node
-	// the first node which has a link to a file directory and has style 'file_folder'
+	// the first node which has a link to a file directory and has style 'file_folder' + 'baseFolder'
 def obtainBaseFolder(n) {
-	// ui.informationMessage(n.pathToRoot.toString())
-	return n.pathToRoot.find{it.link?.file?.isDirectory() && it.hasStyle('file_folder') && it.icons.contains('bookmark')}
+	return n.pathToRoot.find{it.link?.file?.directory && it.hasStyle('file_folder') && it.hasStyle('baseFolder')}
 }
+//end
+
+//region: información desde nodos
 
 // function, returns string, returns path to the file linked in the node
 def getLink(n){
@@ -248,18 +261,6 @@ def getLink(n){
 	}
 }
 
-//adds a link to a file to the node
-def setLink(n, addr){
-	// ui.informationMessage(addr.toString())
-	n.link.file = new File(addr.toString())
-}
-
-//corrects link to image in node which is also a file in the project
-def setLinkImage(n, addr){
-	if(n.externalObject && n.link.file && n.link.text == n.externalObject.uri){
-		n.externalObject.file = new File(addr.toString())
-	}
-}
 
 //function, returns string, builds the new path string by looking at the position of the node in the mindmap
 //it uses all the file-folder styled nodes till the base node
@@ -275,11 +276,12 @@ def obtainPathFromMap(n) {
 	return texto.toString()
 }
 
-//function, returns string, looks at text in node and correct it if it can't be used as a foldername
-def correctFolderName(n){
-	def texto = n.text.trim().replace('/','-').replace('\\','-').replace('.','-') //replaces chars not usefull in an Folder name
-	n.text = texto //corrects text in node too
-	return texto.toString() // returns the corrected text
+// function Boolean - is this link a link to a node in an other map?
+//it seems it is not needed, cause a node mitha a link to a node in another map has following charachteristics:
+	// assert node.link.uri.scheme == 'file'
+	// assert !node.link.file // --> its not selected when defining fileList 
+def isLinkToMapNode(mylink){
+	(mylink.uri.scheme == 'file' && mylink.uri.path?.reverse().take(3).reverse().toLowerCase() == '.mm' && mylink.uri.fragment?.take(3) =='ID_') 
 }
 
 //function, boolean, it returns true if the node has a clone which position in disk is equivalent as its position in the map
@@ -288,6 +290,39 @@ def correctFolderName(n){
 def hasCloneWhithPositionOK(n){
 	return n.countNodesSharingContent>0 && n.nodesSharingContent.any{h -> getLink(h) == (obtainPathFromMap(h) + h.text) }
 }
+
+//end
+
+//region: funciones strings
+
+
+
+//function, returns string, looks at text in node and correct it if it can't be used as a foldername
+def correctFolderName(n){
+	def texto = n.text.trim().replace('/','-').replace('\\','-').replace('.','-') //replaces chars not usefull in an Folder name
+	n.text = texto //corrects text in node too
+	return texto.toString() // returns the corrected text
+}
+
+//end
+
+//region: modificando nodos
+//adds a [link to a file] to the node
+def setLink(n, addr){
+	// ui.informationMessage(addr.toString())
+	n.link.file = new File(addr.toString())
+}
+
+//corrects link to image in node which is also a file in the project
+def setLinkImage(n, addr){
+	if(n.externalObject && n.link.file && n.link.text == n.externalObject.uri){
+		n.externalObject.file = new File(addr.toString())
+	}
+}
+
+//end
+
+//region: manipulando drive
 
 // create all folders of a path (if they doesn't exist)
 def createPath(String p) {
@@ -315,3 +350,10 @@ def isDirEmpty(dirName) {
     dir.exists() && dir.directory && (dir.list() as List).empty
 }
 
+/// function Boolean - does the link points to an existent file?
+def existsInDrive( mylink){
+	(mylink.uri?.scheme == 'file' && mylink.file.exists())
+}
+//end
+
+//end
