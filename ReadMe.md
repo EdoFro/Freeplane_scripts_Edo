@@ -22,6 +22,7 @@ I'm going to write some of the docs in spanish first (easier) and hopefully tran
 Script | Description
 -------|----------
 copyLinkToClipboard.groovy | copies the path of a "link to a file" from the selected node (if it has any) into the clipboard ([here](/copy%20node%20link%20to%20clipboard))
+openWithNotepad++ | opens node's note or node's linked file into Notepad++ ([here](/Scripts))
 
 ## TODO list:
 
