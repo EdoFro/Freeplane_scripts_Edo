@@ -11,19 +11,44 @@ Script to easy copy the link to a file of a node into the clipboard to paste it 
 
 def texto // defining variable texto 
 
-texto = node.link.text //obtaining the link text from the selected node
-texto = URLDecoder.decode(texto) // decoding it to be "windows readable"
-/* forma anterior (other way I used before to decode. didn't notice any diference)
-texto = node.link.text.replace('%20',' ')
-*/
+texto = getLink(node) //obtaining the link text from the selected node
 
-//looks if the text starts with 'file:/'
-if (texto[0..5]=='file:/'){
-    texto = texto.drop(6).replace('/','\\') //replaces slashes with backslashes
+if(texto!=''){
+	textUtils.copyToClipboard(texto)
+	c.statusInfo = 'link copied to clipboard:   ' + texto // info in bottom bar of Freeplane's window
+} else {
+	c.statusInfo = 'node had no link to be copied'
 }
 
-// ui.informationMessage('b ' + texto)
+def getLink(n){
+	if(n.link){
+		switch (n.link.uri.scheme){
+			case 'file':
+				return n.link.file.path
+				break
+			case ~/^https?/:
+				return n.link.uri.scheme + ':' + n.link.uri.schemeSpecificPart
+				break
+			default:
+				return n.link.text
+				break
+		}
+	} else {
+		return ''
+	}
+}
 
-textUtils.copyToClipboard(texto) // copying to clipboard
 
-c.statusInfo = 'link copied to the clipboard' // info in bottom bar of Freeplane's window
+
+/* My older way to get the link to a file
+	//looks if the text starts with 'file:/'
+	if (texto[0..5]=='file:/'){
+		texto = texto.drop(6).replace('/','\\') //replaces slashes with backslashes
+	}
+
+	// ui.informationMessage('b ' + texto)
+
+	textUtils.copyToClipboard(texto) // copying to clipboard
+
+	c.statusInfo = 'link copied to the clipboard' // info in bottom bar of Freeplane's window
+*/
