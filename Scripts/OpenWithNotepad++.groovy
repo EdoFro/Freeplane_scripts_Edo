@@ -30,7 +30,7 @@ mapFolders = [
 ]
 mapFolders['groovy'] = c.userDirectory.path + '\\scripts\\'
 
-fileName = 'tempOWNfile'
+fileName = 'myTempFile'
 
 //def fileAddressTemp = "C:/Temp/notaTemp." //file name and path (but without extension) where temp files are going to be saved. this directory must exist (in my case 'C:/Temp/').
 //def fileAddressScript = c.userDirectory.path + '\\scripts\\groovyTemp.' //file name and path (but without extension) where GROOVY SCRIPTS temp files are going to be saved (a place where Freeplane can "see it")
@@ -102,7 +102,7 @@ if (node.link || node.note){
 	def nhijo = node.createChild('Temp Script')
 	nhijo.noteText = texto
 	setExtension(nhijo, ext)
-	c.select(nhijo)
+	// c.select(nhijo)
 	c.statusInfo = "script copied into node's note"
 }
 
