@@ -21,3 +21,5 @@ Script for Freeplane to open files or node's notes as files in Notepad++
 ## more information
 
 more information in the OpenWithNotepad++.mm Freeplane file
+
+and video (without audio. sorry) here: https://youtu.be/GTYWBa4EUFk

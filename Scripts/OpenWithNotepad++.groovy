@@ -37,7 +37,7 @@ fileName = 'myTempFile'
 
 
 def addressNpp = 'C:\\Program Files\\Notepad++\\notepad++.exe' // there is Notepad++ executable instaled
-def acceptedFileExtensions = ['groovy', 'sql', 'txt', 'ini', 'cfg'] // list of file extension I decided that can be opened with Notepad ++ (it is only to avoid opening pdf or excel files in N++ accidentally)
+def acceptedFileExtensions = ['groovy', 'sql', 'txt', 'ini', 'cfg', 'md'] // list of file extension I decided that can be opened with Notepad ++ (it is only to avoid opening pdf or excel files in N++ accidentally)
 
 
 

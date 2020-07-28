@@ -3,7 +3,7 @@
 <node TEXT="OpenWithNotepad++" FOLDED="false" ID="ID_889872586" CREATED="1595532534890" MODIFIED="1595532583067" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
-    <properties show_icon_for_attributes="true" fit_to_viewport="false" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
+    <properties fit_to_viewport="false" show_icon_for_attributes="true" show_note_icons="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
@@ -63,11 +63,11 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="8" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="9" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="description" LOCALIZED_STYLE_REF="styles.topic" POSITION="right" ID="ID_496019362" CREATED="1595538933740" MODIFIED="1595540635328">
 <edge COLOR="#0000ff"/>
 <node TEXT="Script to open files or node&apos;s notes as files in Notepad++" ID="ID_672112149" CREATED="1595538948717" MODIFIED="1595539006095"/>
-<node TEXT="general idea:" FOLDED="true" ID="ID_1158237344" CREATED="1595540970979" MODIFIED="1595541022359"><richcontent TYPE="DETAILS">
+<node TEXT="general idea:" ID="ID_1158237344" CREATED="1595540970979" MODIFIED="1595541022359"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -846,7 +846,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 </node>
 </node>
@@ -871,7 +870,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 </node>
 <node TEXT="it inserted a child node with the actual text of the groovy file" ID="ID_732354952" CREATED="1595544968267" MODIFIED="1595545157418"><richcontent TYPE="DETAILS">
@@ -974,7 +972,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 </node>
 <node TEXT="ctrl + shft + m" ID="ID_1623627792" CREATED="1595546322198" MODIFIED="1595886288400"><richcontent TYPE="DETAILS">
@@ -989,7 +986,6 @@
     </p>
   </body>
 </html>
-
 </richcontent>
 </node>
 </node>
@@ -1068,11 +1064,23 @@
 <node TEXT="in this case it won&apos;t work cause this file is in my computer, not in yours, but you can test it with one of your own." ID="ID_1594428052" CREATED="1595547335854" MODIFIED="1595886534972"/>
 </node>
 </node>
-<node TEXT="What&apos;s next?" LOCALIZED_STYLE_REF="styles.topic" FOLDED="true" POSITION="right" ID="ID_1271082464" CREATED="1595547576123" MODIFIED="1595547582871">
+<node TEXT="example video" LOCALIZED_STYLE_REF="styles.topic" POSITION="right" ID="ID_505521985" CREATED="1595894035602" MODIFIED="1595894042868">
 <edge COLOR="#0000ff"/>
-<node TEXT="I&apos;m going to add another map to this repository where I´m going to copy some groovy scripts tests and examples" ID="ID_43758681" CREATED="1595547585211" MODIFIED="1595886587952"/>
-<node TEXT="Maybe you can add somes too" ID="ID_1232973814" CREATED="1595547660695" MODIFIED="1595547707743"/>
-<node TEXT="and we can create a reference map with little groovy scripts for freeplane" ID="ID_1725613685" CREATED="1595547708917" MODIFIED="1595886601758"/>
+<node TEXT="youtube video with an sql example" ID="ID_757408180" CREATED="1595894046352" MODIFIED="1595894100274" LINK="https://youtu.be/GTYWBa4EUFk"><richcontent TYPE="DETAILS">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      has no Audio, but it helps to get an idea
+    </p>
+  </body>
+</html>
+
+</richcontent>
+</node>
 </node>
 </node>
 </map>
